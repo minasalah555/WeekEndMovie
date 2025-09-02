@@ -1,0 +1,225 @@
+ body {
+   font-family: Arial, sans-serif;
+   background: #111;
+   margin: 0;
+   padding: 0;
+   color: white;
+ }
+
+ .cast-list {
+   padding-left: 40px;
+   padding-right: 40px;
+   overflow-x: auto;
+   display: flex;
+   gap: 20px;
+   scrollbar-width: thick;
+   scrollbar-color: #f5efef transparent;
+ }
+
+ .container {
+   width: 100%;
+   margin: auto;
+ }
+
+ .top {
+   display: flex;
+   gap: 20px;
+   padding: 60px 40px;
+   height: 110vh;
+   background-size: cover;
+   background-position: center;
+   position: relative;
+   color: white;
+ }
+
+ .top::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(0, 0, 0, 0.6);
+   z-index: 1;
+ }
+
+ .poster {
+   margin-top: 15px;
+   width: 300px;
+   border-radius: 10px;
+   height: 500px;
+   position: relative;
+   z-index: 2;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+ }
+
+ .details {
+   position: relative;
+   z-index: 2;
+   max-width: 700px;
+ }
+
+ .details h1 {
+   margin: 0;
+   font-size: 36px;
+ }
+
+ .genre {
+   color: #ccc;
+   margin-bottom: 15px;
+   font-style: italic;
+ }
+
+ .score-circle {
+   width: 80px;
+   height: 80px;
+   margin-bottom: 15px;
+ }
+
+ .circular-chart {
+   display: block;
+   margin: 0 auto;
+   max-width: 100%;
+   max-height: 100%;
+ }
+
+ .circle-bg {
+   fill: none;
+   stroke: #444;
+   stroke-width: 3.8;
+ }
+
+ .circle {
+   fill: none;
+   stroke-width: 2.8;
+   stroke-linecap: round;
+   stroke-dasharray: 0, 100;
+   transition: stroke 0.3s ease;
+ }
+
+ .percentage {
+   fill: white;
+   font-size: 0.5em;
+   text-anchor: middle;
+ }
+
+ .icons {
+   display: flex;
+   gap: 15px;
+   margin: 15px 0;
+   font-size: 22px;
+   cursor: pointer;
+ }
+
+ .icons i {
+   color: white;
+   transition: 0.3s;
+   background: rgba(255, 255, 255, 0.1);
+   width: 50px;
+   height: 50px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 50%;
+   font-size: 22px;
+ }
+
+ .icons i:hover {
+   color: #0077ff;
+   background: rgba(0, 119, 255, 0.2);
+ }
+
+ button {
+   background: #0077ff;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+ }
+
+ .overview {
+   margin-top: 20px;
+   font-size: 16px;
+   line-height: 1.6;
+   max-width: 600px;
+ }
+
+ .cast {
+   padding: 50px 30px;
+   background: #1a1a1a;
+   width: 100%;
+   position: relative;
+ }
+
+ .cast h2 {
+   margin-bottom: 25px;
+   font-size: 34px;
+   color: #fff;
+ }
+
+ .cast-list {
+   display: flex;
+   gap: 25px;
+   overflow-x: auto;
+   scroll-behavior: smooth;
+   scrollbar-width: none;
+ }
+
+ .cast-list::-webkit-scrollbar {
+   display: none;
+ }
+
+ .actor {
+   text-align: center;
+   flex: 0 0 auto;
+   width: 200px;
+ }
+
+ .actor img {
+   width: 200px;
+   border-radius: 12px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+ }
+
+ .actor p {
+   margin-top: 12px;
+   font-size: 18px;
+   font-weight: bold;
+   color: #fff;
+ }
+
+ .scroll-btn {
+   margin-right: 60px;
+   margin-left: 20px;
+   position: absolute;
+   top: 55%;
+   transform: translateY(-50%);
+   background: rgba(0, 0, 0, 0.6);
+   color: white;
+   border: none;
+   font-size: 30px;
+   padding: 12px 18px;
+   border-radius: 50%;
+   cursor: pointer;
+   z-index: 10;
+   transition: opacity 0.3s ease, background 0.3s ease;
+   opacity: 0;
+ }
+
+ .cast:hover .scroll-btn {
+   opacity: 1;
+ }
+
+ .scroll-btn:hover {
+   background: rgba(255, 255, 255, 0.25);
+ }
+
+ .scroll-left {
+   left: 10px;
+ }
+
+ .scroll-right {
+   right: 10px;
+ }
