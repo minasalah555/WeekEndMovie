@@ -12,7 +12,7 @@ document.querySelector('.login-form').addEventListener('submit', function(e) {
        localStorage.setItem('login_username', username);
       localStorage.setItem('login_password', password);
 
-       window.location.href = "TWEM.html";
+       window.location.href = "index.html";
     });
 
     
