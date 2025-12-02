@@ -99,68 +99,54 @@
             </button>
         </div>
 
-        <!-- Movies Grid -->
+                <!-- Movies Grid -->
         <div class="flex items-center justify-between mb-8">
-            <h3 class="text-2xl font-bold flex items-center gap-2"><span class="w-1 h-8 bg-yellow-500 rounded-full block"></span> أحدث الإصدارات</h3>
+            <h3 class="text-2xl font-bold flex items-center gap-2 text-yellow-400">
+                <span class="w-1 h-8 bg-yellow-500 rounded-full block"></span> أحدث الإصدارات
+            </h3>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Movie Card 1 -->
-            <div class="movie-card glass-panel rounded-2xl overflow-hidden transition duration-300 group cursor-pointer">
-                <div class="relative h-96 overflow-hidden">
-                    <img src="https://image.tmdb.org/t/p/w500/8Q2b7a1a5c5a5a5a5a5a5a5a.jpg" onerror="this.src='https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=800&auto=format&fit=crop'" alt="Dune" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-0 p-4 w-full">
-                        <h4 class="font-bold text-xl mb-1">Dune: Part Two</h4>
-                        <div class="flex justify-between items-center text-sm text-yellow-400">
-                            <span>Sci-Fi</span>
-                            <span>⭐ 8.8</span>
-                        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Movie 1 -->
+            <div class="movie-card glass-panel rounded-xl overflow-hidden relative group cursor-pointer h-80">
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-75">
+                <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                    <h4 class="font-bold text-lg">Dune: Part Two</h4>
+                    <div class="flex justify-between text-xs text-yellow-400 mt-1">
+                        <span>Sci-Fi</span> <span>⭐ 8.8</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Movie Card 2 -->
-            <div class="movie-card glass-panel rounded-2xl overflow-hidden transition duration-300 group cursor-pointer">
-                <div class="relative h-96 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1535016120720-40c6874c3b13?q=80&w=800&auto=format&fit=crop" alt="SciFi" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-0 p-4 w-full">
-                        <h4 class="font-bold text-xl mb-1">Galaxy Wars</h4>
-                        <div class="flex justify-between items-center text-sm text-yellow-400">
-                            <span>Action</span>
-                            <span>⭐ 7.5</span>
-                        </div>
+            <!-- Movie 2 -->
+            <div class="movie-card glass-panel rounded-xl overflow-hidden relative group cursor-pointer h-80">
+                <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-75">
+                <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                    <h4 class="font-bold text-lg">Cyber War</h4>
+                    <div class="flex justify-between text-xs text-yellow-400 mt-1">
+                        <span>Action</span> <span>⭐ 7.5</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Movie Card 3 -->
-            <div class="movie-card glass-panel rounded-2xl overflow-hidden transition duration-300 group cursor-pointer">
-                <div class="relative h-96 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1596727147705-54a9d6ed27e6?q=80&w=800&auto=format&fit=crop" alt="Drama" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-0 p-4 w-full">
-                        <h4 class="font-bold text-xl mb-1">Ocean's Deep</h4>
-                        <div class="flex justify-between items-center text-sm text-yellow-400">
-                            <span>Adventure</span>
-                            <span>⭐ 9.0</span>
-                        </div>
+            <!-- Movie 3 -->
+            <div class="movie-card glass-panel rounded-xl overflow-hidden relative group cursor-pointer h-80">
+                <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e63?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-75">
+                <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                    <h4 class="font-bold text-lg">The Deep Blue</h4>
+                    <div class="flex justify-between text-xs text-yellow-400 mt-1">
+                        <span>Drama</span> <span>⭐ 9.2</span>
                     </div>
                 </div>
             </div>
             
-            <!-- Movie Card 4 -->
-            <div class="movie-card glass-panel rounded-2xl overflow-hidden transition duration-300 group cursor-pointer">
-                <div class="relative h-96 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=800&auto=format&fit=crop" alt="Horror" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-0 p-4 w-full">
-                        <h4 class="font-bold text-xl mb-1">The Silent Forest</h4>
-                        <div class="flex justify-between items-center text-sm text-yellow-400">
-                            <span>Horror</span>
-                            <span>⭐ 6.5</span>
-                        </div>
+            <!-- Movie 4 -->
+            <div class="movie-card glass-panel rounded-xl overflow-hidden relative group cursor-pointer h-80">
+                <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cd4?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-75">
+                <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                    <h4 class="font-bold text-lg">Silent Hill</h4>
+                    <div class="flex justify-between text-xs text-yellow-400 mt-1">
+                        <span>Horror</span> <span>⭐ 6.9</span>
                     </div>
                 </div>
             </div>
