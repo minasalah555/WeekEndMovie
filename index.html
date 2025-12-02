@@ -1,143 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cards</title>
-  <link rel="stylesheet" href="./Css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekend Movie Arabia - Celo DApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <style>
+        body { background-color: #1a202c; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .movie-card { transition: transform 0.3s; }
+        .movie-card:hover { transform: scale(1.05); }
+    </style>
 </head>
+<body class="bg-gray-900 text-white">
 
-<body onload="Main()">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center p-6 bg-gray-800 shadow-lg">
+        <h1 class="text-2xl font-bold text-yellow-400">🎬 Weekend Movie Arabia</h1>
+        <button id="connectWalletBtn" onclick="connectWallet()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-full transition">
+            Connect Celo Wallet 🔗
+        </button>
+        <span id="walletAddress" class="hidden bg-green-600 text-white py-2 px-4 rounded-full text-sm"></span>
+    </nav>
 
-  <header>
-    <div class="header-content">
-      <div class="logo">
-        <h1>Weekend Movie</h1>
-        <div class="logo-icon">🎬</div>
-      </div>
+    <!-- Hero Section -->
+    <header class="text-center py-12 px-4">
+        <h2 class="text-4xl font-bold mb-4">اكتشف وقيم الأفلام على Celo Blockchain</h2>
+        <p class="text-gray-400 mb-8">منصة لامركزية لتقييم الأفلام بشفافية مطلقة.</p>
+    </header>
 
-      <nav>
-        <ul class="nav-menu">
-          <li><a href="#movies">Movies</a>
-            <ul>
-              <li><a href="#popular">Popular</a></li>
-              <li><a href="#now-playing">Now Playing</a></li>
-              <li><a href="#upcoming">Upcoming</a></li>
-              <li><a href="#top-rated">Top Rated</a></li>
-            </ul>
-          </li>
-          <li><a href="#tv-shows">TV Shows</a>
-            <ul>
-              <li><a href="#popular-tv">Popular</a></li>
-              <li><a href="#airing-today">Airing Today</a></li>
-              <li><a href="#on-tv">On TV</a></li>
-              <li><a href="#top-rated-tv">Top Rated</a></li>
-            </ul>
-          </li>
-          <li><a href="#people">People</a></li>
-          <li><a href="#more">More</a>
-            <ul>
-              <li><a href="#discussions">Discussions</a></li>
-              <li><a href="#leaderboard">Leaderboard</a></li>
-              <li><a href="#support">Support</a></li>
-              <li><a href="#api">API</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-
-      <ul class="primary-nav">
-        <li><a href="login.html">Login</a></li>
-        <li><a href="login.html">Sign Up</a></li>
-      </ul>
-    </div>
-  </header>
-
-  <div class="search-bar">
-    <div class="search-container">
-      <h2 id="enimationH"></h2>
-      <p id="enimationP"></p>
-    </div>
-  </div>
-  </div>
-   <div class="header1" style=" background-color:#f0eeee; padding-top:10px; padding-bottom:20px; padding-left:40px;">
-    <h2 style="color:black ;">Populer</h2>
-  </div>
-  <div class="section1" id="main-section" style="
-    background-image: url('./CastImg/background.png');
-    background-size: cover;
-    width: 100% ;
-    height: 100%;
-    background-position: center; 
-    background-repeat: no-repeat;
-">
-
-  </div>
-
- 
-  <div id="container" style="height: 400px;">
-    <div class="cards-wrapper overlay" style="height: 400px;">
-      <h2 style="padding-left: 20px; padding-top: 30px; font-family:Source Sans Pro, Arial, sans-serif">Trending Movies</h2>
-      <ul class="cards-list" id="cards-list1">
-      </ul>
-    </div>
-  </div>
-
-     <div class="header1" style="  padding-top:10px; padding-bottom:20px; padding-left:40px;">
-    <h2 style="color:black ;">Upcoming</h2>
-  </div>
-  <div class="section1" id="main-section2">
-    
-  </div>
-
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <div class="footer-logo">
-          <h2 id="Welcomeuser">Weekend Movie</h2>
-          <div class="logo-icon">🎬</div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4">
+        
+        <!-- Review Section (Hidden until connected) -->
+        <div id="reviewSection" class="hidden bg-gray-800 p-6 rounded-lg mb-10 border border-yellow-500">
+            <h3 class="text-xl font-bold mb-4">📝 أضف تقييمك (على البلوكتشين)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="movieName" placeholder="اسم الفيلم" class="p-3 rounded bg-gray-700 text-white border border-gray-600">
+                <select id="rating" class="p-3 rounded bg-gray-700 text-white border border-gray-600">
+                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                    <option value="4">⭐⭐⭐⭐ (4)</option>
+                    <option value="3">⭐⭐⭐ (3)</option>
+                    <option value="2">⭐⭐ (2)</option>
+                    <option value="1">⭐ (1)</option>
+                </select>
+            </div>
+            <textarea id="comment" placeholder="اكتب رأيك هنا..." class="w-full mt-4 p-3 rounded bg-gray-700 text-white border border-gray-600 h-24"></textarea>
+            <button onclick="submitReview()" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded w-full">
+                تسجيل التقييم على Celo 🚀
+            </button>
         </div>
-        <p>Weekend Movie is your go-to destination for discovering the latest movies and TV shows. Find your next
-          favorite entertainment.</p>
-      </div>
 
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="#movies">Movies</a></li>
-          <li><a href="#tv-shows">TV Shows</a></li>
-          <li><a href="#people">People</a></li>
-          <li><a href="#api">API</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h3>Support</h3>
-        <ul>
-          <li><a href="#help">Help Center</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-          <li><a href="#privacy">Privacy Policy</a></li>
-          <li><a href="#terms">Terms of Service</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h3>Connect</h3>
-        <div class="social-links">
-          <a href="#" class="social-link">Facebook</a>
-          <a href="#" class="social-link">Twitter</a>
-          <a href="#" class="social-link">Instagram</a>
+        <!-- Movies Grid -->
+        <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">أحدث الأفلام</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8" id="moviesGrid">
+            <!-- Placeholder Movies -->
+            <div class="movie-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                <img src="https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHkjPoXIpo.jpg" alt="Movie" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h4 class="font-bold text-lg">Dune: Part Two</h4>
+                    <p class="text-gray-400 text-sm">2024</p>
+                </div>
+            </div>
+            <div class="movie-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                <img src="https://image.tmdb.org/t/p/w500/kingdom.jpg" alt="Movie" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h4 class="font-bold text-lg">Kingdom of the Planet</h4>
+                    <p class="text-gray-400 text-sm">2024</p>
+                </div>
+            </div>
+             <div class="movie-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                <img src="https://image.tmdb.org/t/p/w500/godzilla.jpg" alt="Movie" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h4 class="font-bold text-lg">Godzilla x Kong</h4>
+                    <p class="text-gray-400 text-sm">2024</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </main>
 
-    <div class="footer-bottom">
-      <p>&copy; 2024 Weekend Movie. All rights reserved.</p>
-    </div>
-  </footer>
+    <footer class="text-center py-8 text-gray-500 mt-10 border-t border-gray-800">
+        <p>Built for Celo Proof of Ship Season 10 🚢</p>
+    </footer>
 
-  <script src="./JavaScript/index.js"></script>
+    <script>
+        let provider, signer, account;
+
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    // Request account access
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    await provider.send("eth_requestAccounts", []);
+                    signer = provider.getSigner();
+                    account = await signer.getAddress();
+
+                    // Switch to Celo Alfajores Testnet
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0xaef3' }], // 44787 in hex
+                        });
+                    } catch (switchError) {
+                        // If network is missing, add it
+                        if (switchError.code === 4902) {
+                            await window.ethereum.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [{
+                                    chainId: '0xaef3',
+                                    chainName: 'Celo Alfajores Testnet',
+                                    nativeCurrency: { name: 'Celo', symbol: 'CELO', decimals: 18 },
+                                    rpcUrls: ['https://alfajores-forno.celo-testnet.org'],
+                                    blockExplorerUrls: ['https://alfajores.celoscan.io/']
+                                }],
+                            });
+                        }
+                    }
+
+                    // Update UI
+                    document.getElementById("connectWalletBtn").classList.add("hidden");
+                    document.getElementById("walletAddress").innerText = account.substring(0, 6) + "..." + account.substring(account.length - 4);
+                    document.getElementById("walletAddress").classList.remove("hidden");
+                    document.getElementById("reviewSection").classList.remove("hidden");
+                    
+                    alert("تم الاتصال بالمحفظة بنجاح! ✅");
+
+                } catch (error) {
+                    console.error(error);
+                    alert("فشل الاتصال بالمحفظة.");
+                }
+            } else {
+                alert("يرجى تثبيت محفظة MetaMask أو Celo Extension Wallet!");
+            }
+        }
+
+        async function submitReview() {
+            // هنا سنضيف كود العقد الذكي بمجرد استلام العنوان من العميل
+            alert("سيتم إرسال هذا التقييم إلى العقد الذكي فور نشره! 🚀");
+        }
+    </script>
 </body>
-
 </html>
