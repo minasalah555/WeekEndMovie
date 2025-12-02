@@ -3,85 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekend Movie Arabia - Celo DApp</title>
+    <title>Weekend Movie Arabia - Celo Web3</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ethers.js for Blockchain -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <!-- Google Fonts (Cairo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        body { background-color: #1a202c; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .movie-card { transition: transform 0.3s; }
-        .movie-card:hover { transform: scale(1.05); }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: #0f172a; 
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .movie-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
+        .celo-btn {
+            background: linear-gradient(90deg, #fbcc5c 0%, #facc15 100%);
+            color: #000;
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="antialiased selection:bg-yellow-500 selection:text-black">
 
     <!-- Navbar -->
-    <nav class="flex justify-between items-center p-6 bg-gray-800 shadow-lg">
-        <h1 class="text-2xl font-bold text-yellow-400">🎬 Weekend Movie Arabia</h1>
-        <button id="connectWalletBtn" onclick="connectWallet()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-full transition">
-            Connect Celo Wallet 🔗
-        </button>
-        <span id="walletAddress" class="hidden bg-green-600 text-white py-2 px-4 rounded-full text-sm"></span>
+    <nav class="glass-panel fixed w-full z-50 top-0 shadow-2xl">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🎬</span>
+                <div>
+                    <h1 class="text-xl font-black tracking-wider text-yellow-400">WEEKEND MOVIE</h1>
+                    <p class="text-xs text-gray-400 tracking-widest">ARABIA ON CELO</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <span id="walletAddress" class="hidden glass-panel px-4 py-2 rounded-full text-sm font-mono text-green-400 border-green-500/30 border"></span>
+                <button id="connectWalletBtn" onclick="connectWallet()" class="celo-btn hover:brightness-110 font-bold py-2 px-6 rounded-full transition duration-300 shadow-[0_0_15px_rgba(250,204,21,0.4)] flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Connect Wallet
+                </button>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="text-center py-12 px-4">
-        <h2 class="text-4xl font-bold mb-4">اكتشف وقيم الأفلام على Celo Blockchain</h2>
-        <p class="text-gray-400 mb-8">منصة لامركزية لتقييم الأفلام بشفافية مطلقة.</p>
-    </header>
+    <div class="pt-32 pb-12 text-center px-4">
+        <span class="inline-block py-1 px-3 rounded-full bg-yellow-500/10 text-yellow-400 text-sm font-bold mb-4 border border-yellow-500/20">✨ Celo Proof of Ship Season 10</span>
+        <h2 class="text-5xl md:text-6xl font-black mb-6 leading-tight">قيم أفلامك المفضلة <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">على البلوكتشين</span></h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-8">منصة لامركزية تضمن شفافية التقييمات وتمنحك تحكماً كاملاً في بياناتك. ابدأ الآن واربط محفظتك.</p>
+    </div>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4">
+    <main class="container mx-auto px-6 pb-20">
         
-        <!-- Review Section (Hidden until connected) -->
-        <div id="reviewSection" class="hidden bg-gray-800 p-6 rounded-lg mb-10 border border-yellow-500">
-            <h3 class="text-xl font-bold mb-4">📝 أضف تقييمك (على البلوكتشين)</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="text" id="movieName" placeholder="اسم الفيلم" class="p-3 rounded bg-gray-700 text-white border border-gray-600">
-                <select id="rating" class="p-3 rounded bg-gray-700 text-white border border-gray-600">
-                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
-                    <option value="4">⭐⭐⭐⭐ (4)</option>
-                    <option value="3">⭐⭐⭐ (3)</option>
-                    <option value="2">⭐⭐ (2)</option>
-                    <option value="1">⭐ (1)</option>
-                </select>
+        <!-- Review Input Section (Hidden initially) -->
+        <div id="reviewSection" class="hidden glass-panel p-8 rounded-2xl mb-16 border-t-4 border-yellow-400 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-400 opacity-50"></div>
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-black font-bold">1</div>
+                <h3 class="text-2xl font-bold">سجل تقييمك الجديد</h3>
             </div>
-            <textarea id="comment" placeholder="اكتب رأيك هنا..." class="w-full mt-4 p-3 rounded bg-gray-700 text-white border border-gray-600 h-24"></textarea>
-            <button onclick="submitReview()" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded w-full">
-                تسجيل التقييم على Celo 🚀
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                    <label class="block text-gray-400 text-sm mb-2">اسم الفيلم</label>
+                    <input type="text" id="movieName" placeholder="مثال: Dune: Part Two" class="w-full bg-black/30 border border-gray-700 rounded-xl p-4 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition text-white">
+                </div>
+                <div>
+                    <label class="block text-gray-400 text-sm mb-2">التقييم</label>
+                    <select id="rating" class="w-full bg-black/30 border border-gray-700 rounded-xl p-4 focus:border-yellow-500 outline-none text-white appearance-none">
+                        <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                        <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                        <option value="3">⭐⭐⭐ (3/5)</option>
+                        <option value="2">⭐⭐ (2/5)</option>
+                        <option value="1">⭐ (1/5)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <label class="block text-gray-400 text-sm mb-2">رأيك في الفيلم</label>
+                <textarea id="comment" placeholder="اكتب مراجعة حقيقية سيتم تخزينها للأبد على Celo..." class="w-full bg-black/30 border border-gray-700 rounded-xl p-4 h-32 focus:border-yellow-500 outline-none transition text-white"></textarea>
+            </div>
+
+            <button onclick="submitReview()" class="mt-6 w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl transition duration-300 flex items-center justify-center gap-2 text-lg shadow-lg shadow-green-900/50">
+                <span>🚀</span> إرسال للمعاملة (Submit Transaction)
             </button>
         </div>
 
         <!-- Movies Grid -->
-        <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">أحدث الأفلام</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8" id="moviesGrid">
-            <!-- Placeholder Movies -->
-            <div class="movie-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                <img src="https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHkjPoXIpo.jpg" alt="Movie" class="w-full h-64 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-lg">Dune: Part Two</h4>
-                    <p class="text-gray-400 text-sm">2024</p>
+        <div class="flex items-center justify-between mb-8">
+            <h3 class="text-2xl font-bold flex items-center gap-2"><span class="w-1 h-8 bg-yellow-500 rounded-full block"></span> أحدث الإصدارات</h3>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Movie Card 1 -->
+            <div class="movie-card glass-panel rounded-2xl overflow-hidden transition duration-300 group cursor-pointer">
+                <div class="relative h-96 overflow-hidden">
+                    <img src="https://image.tmdb.org/t/p/w500/8Q2b7a1a5c5a5a5a5a5a5a5a.jpg" onerror="this.src='https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=800&auto=format&fit=crop'" alt="Dune" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 p-4 w-full">
+                        <h4 class="font-bold text-xl mb-1">Dune: Part Two</h4>
+                        <div class="flex justify-between items-center text-sm text-yellow-400">
+                            <span>Sci-Fi</span>
+                            <span>⭐ 8.8</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="movie-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                <img src="https://image.tmdb.org/t/p/w500/kingdom.jpg" alt="Movie" class="w-full h-64 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-lg">Kingdom of the Planet</h4>
-                    <p class="text-gray-400 text-sm">2024</p>
+
+            <!-- Movie Card 2 -->
+            <div class="movie-card glass-panel rounded-2xl overflow-hidden transition duration-300 group cursor-pointer">
+                <div class="relative h-96 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1535016120720-40c6874c3b13?q=80&w=800&auto=format&fit=crop" alt="SciFi" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 p-4 w-full">
+                        <h4 class="font-bold text-xl mb-1">Galaxy Wars</h4>
+                        <div class="flex justify-between items-center text-sm text-yellow-400">
+                            <span>Action</span>
+                            <span>⭐ 7.5</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-             <div class="movie-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                <img src="https://image.tmdb.org/t/p/w500/godzilla.jpg" alt="Movie" class="w-full h-64 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-lg">Godzilla x Kong</h4>
-                    <p class="text-gray-400 text-sm">2024</p>
+
+            <!-- Movie Card 3 -->
+            <div class="movie-card glass-panel rounded-2xl overflow-hidden transition duration-300 group cursor-pointer">
+                <div class="relative h-96 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1596727147705-54a9d6ed27e6?q=80&w=800&auto=format&fit=crop" alt="Drama" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 p-4 w-full">
+                        <h4 class="font-bold text-xl mb-1">Ocean's Deep</h4>
+                        <div class="flex justify-between items-center text-sm text-yellow-400">
+                            <span>Adventure</span>
+                            <span>⭐ 9.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Movie Card 4 -->
+            <div class="movie-card glass-panel rounded-2xl overflow-hidden transition duration-300 group cursor-pointer">
+                <div class="relative h-96 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=800&auto=format&fit=crop" alt="Horror" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 p-4 w-full">
+                        <h4 class="font-bold text-xl mb-1">The Silent Forest</h4>
+                        <div class="flex justify-between items-center text-sm text-yellow-400">
+                            <span>Horror</span>
+                            <span>⭐ 6.5</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <footer class="text-center py-8 text-gray-500 mt-10 border-t border-gray-800">
-        <p>Built for Celo Proof of Ship Season 10 🚢</p>
-    </footer>
 
     <script>
         let provider, signer, account;
@@ -89,20 +173,17 @@
         async function connectWallet() {
             if (window.ethereum) {
                 try {
-                    // Request account access
                     provider = new ethers.providers.Web3Provider(window.ethereum);
                     await provider.send("eth_requestAccounts", []);
                     signer = provider.getSigner();
                     account = await signer.getAddress();
 
-                    // Switch to Celo Alfajores Testnet
                     try {
                         await window.ethereum.request({
                             method: 'wallet_switchEthereumChain',
-                            params: [{ chainId: '0xaef3' }], // 44787 in hex
+                            params: [{ chainId: '0xaef3' }], // Celo Alfajores
                         });
                     } catch (switchError) {
-                        // If network is missing, add it
                         if (switchError.code === 4902) {
                             await window.ethereum.request({
                                 method: 'wallet_addEthereumChain',
@@ -117,26 +198,31 @@
                         }
                     }
 
-                    // Update UI
-                    document.getElementById("connectWalletBtn").classList.add("hidden");
-                    document.getElementById("walletAddress").innerText = account.substring(0, 6) + "..." + account.substring(account.length - 4);
-                    document.getElementById("walletAddress").classList.remove("hidden");
-                    document.getElementById("reviewSection").classList.remove("hidden");
+                    const btn = document.getElementById("connectWalletBtn");
+                    const addressSpan = document.getElementById("walletAddress");
                     
-                    alert("تم الاتصال بالمحفظة بنجاح! ✅");
+                    btn.innerHTML = `✅ Connected`;
+                    btn.classList.replace('celo-btn', 'bg-gray-700');
+                    
+                    addressSpan.innerText = account.substring(0, 6) + "..." + account.substring(account.length - 4);
+                    addressSpan.classList.remove("hidden");
+                    
+                    const section = document.getElementById("reviewSection");
+                    section.classList.remove("hidden");
+                    section.scrollIntoView({ behavior: 'smooth' });
 
                 } catch (error) {
                     console.error(error);
-                    alert("فشل الاتصال بالمحفظة.");
+                    alert("فشل الاتصال. تأكد من تثبيت المحفظة.");
                 }
             } else {
-                alert("يرجى تثبيت محفظة MetaMask أو Celo Extension Wallet!");
+                window.open('https://metamask.io/download/', '_blank');
             }
         }
 
         async function submitReview() {
-            // هنا سنضيف كود العقد الذكي بمجرد استلام العنوان من العميل
-            alert("سيتم إرسال هذا التقييم إلى العقد الذكي فور نشره! 🚀");
+            // هنا هنستنى الـ Address من العميل
+            alert("تم النقر! في انتظار عنوان العقد (Contract Address) من العميل لإتمام المعاملة.");
         }
     </script>
 </body>
